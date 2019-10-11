@@ -19,7 +19,7 @@ mn <- get_decennial(geography = "county",
                     geometry = T) %>%
   mutate(county =  str_replace(NAME, ", Minnesota", ""))
 
-crime <- read.csv("C:/Users/DELL/Documents/UMN//MN-Crime-Map/mn_compass_crime.csv") %>%
+crime <- read.csv("mn_compass_crime.csv") %>%
   gather(key = year, value = value, -c(county, measure)) %>%
   mutate(year = str_remove_all(year, pattern = "X"),
          value = as.numeric(str_remove_all(value, pattern=",")),
@@ -59,4 +59,4 @@ plot <- ggplot(mn_crime) +
         plot.title = element_text(face="bold")) 
 
 animate(plot, fps = 5, end_pause = 10)
-anim_save(filename = "mn_crime.gif", animation = last_animation(), path = "C:/Users/DELL/Documents/UMN/MN-Crime-Map/")
+anim_save(filename = "mn_crime.gif", animation = last_animation())
